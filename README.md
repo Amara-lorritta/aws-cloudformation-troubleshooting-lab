@@ -1,16 +1,15 @@
-Troubleshoot AWS CloudFormation Deployments
+## **Troubleshoot AWS CloudFormation Deployments**
 
-(Full professional portfolio layout, ready to post on GitHub with diagram, commands, and explanations.)
 
-🧠 Overview
+## **Overview**
 
 This lab provides practical experience troubleshooting AWS CloudFormation stack creation and deletion failures using both the AWS Management Console and AWS CLI.
 
-You’ll investigate CloudFormation deployment issues, analyze logs, detect configuration drift, and resolve stack deletion problems while keeping critical data resources intact.
+I will investigate CloudFormation deployment issues, analyze logs, detect configuration drift, and resolve stack deletion problems while keeping critical data resources intact.
 
-🎯 Objectives & Learning Outcomes
+## **Objectives & Learning Outcomes**
 
-After completing this lab, you will be able to:
+After completing this lab,I was able to:
 
 Use JMESPath queries to filter JSON output in the AWS CLI.
 
@@ -24,15 +23,18 @@ Detect and interpret resource drift using the CLI.
 
 Resolve DELETE_FAILED stack issues involving S3 buckets containing objects.
 
-🏗️ AWS Architecture Diagram
+## **Architecture Diagram**
+<img width="1024" height="500" alt="e2296a9d-ba45-434a-a5cb-8583b79ee349" src="https://github.com/user-attachments/assets/cca227ae-d0b7-482d-87c3-f49f105fb509" />
 
-Below is the AWS-style visual architecture (before → after troubleshooting).
+
 
 Before: Failing CloudFormation deployment with EC2 WaitCondition timeout
 
 After: Corrected deployment, drift detection, and stack deletion success
 
-🧩 Commands & Steps (Copy-All-in-One Block)
+## **Commands & Steps**
+
+```bach
 # ---------- TASK 1: PRACTICE JMESPath ----------
 # Visit https://jmespath.org and try these JSON queries
 # Example JSON:
@@ -152,8 +154,10 @@ bucketLogicalId=$(aws cloudformation list-stack-resources \
 aws cloudformation delete-stack \
 --stack-name myStack \
 --retain-resources $bucketLogicalId
+```
+## **ScreenShoot**
 
-🔎 What Actually Happened
+## **What Actually Happened**
 
 Initial Stack Failure:
 CloudFormation stack creation failed due to a WaitCondition timeout caused by a yum install http command error in the EC2 instance’s UserData script.
@@ -171,15 +175,8 @@ Delete Failure & Solution:
 The stack deletion failed because the S3 bucket contained objects.
 Solution: Use the --retain-resources flag to preserve the bucket while deleting other resources successfully.
 
-💬 How to Explain It to an Interviewer
 
-“I deployed a CloudFormation stack that initially failed due to a WaitCondition timeout. I used the AWS CLI and JMESPath queries to diagnose that the EC2 userdata script had a package error.
-
-I fixed it, redeployed the stack, and verified successful creation. Then, I intentionally introduced configuration drift in the security group and detected it using the drift detection API.
-
-Finally, I resolved a DELETE_FAILED issue caused by an S3 bucket with objects by retaining that resource using the --retain-resources parameter. This demonstrated my ability to troubleshoot, debug, and manage infrastructure automation end-to-end using CloudFormation and AWS CLI.”
-
-🧰 Tools Used
+## **Tools Used**
 
 AWS CloudFormation
 
@@ -193,11 +190,25 @@ JMESPath
 
 Linux Bash utilities (watch, grep, vim)
 
-🔑 Key Takeaways
+## **Key Takeaways**
 
-✅ CloudFormation rollback deletes failed resources unless --on-failure DO_NOTHING is used.
-✅ JMESPath queries enable precise JSON filtering in CLI outputs.
-✅ Inspect /var/log/cloud-init-output.log for EC2 userdata script failures.
-✅ Drift detection identifies configuration changes made outside of CloudFormation.
-✅ DELETE_FAILED can be resolved via --retain-resources to preserve non-empty S3 buckets.
-✅ Infrastructure as Code (IaC) enables repeatable, version-controlled AWS deployments.
+CloudFormation rollback deletes failed resources unless --on-failure DO_NOTHING is used.
+
+JMESPath queries enable precise JSON filtering in CLI outputs.
+
+Inspect /var/log/cloud-init-output.log for EC2 userdata script failures.
+
+Drift detection identifies configuration changes made outside of CloudFormation.
+
+DELETE_FAILED can be resolved via --retain-resources to preserve non-empty S3 buckets.
+
+Infrastructure as Code (IaC) enables repeatable, version-controlled AWS deployments.
+
+
+## **Author**
+
+Amarachi Emeziem 
+
+Cloud Engineer/Security 
+
+LinkedIn Profile: 
