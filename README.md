@@ -155,7 +155,6 @@ aws cloudformation delete-stack \
 --stack-name myStack \
 --retain-resources $bucketLogicalId
 ```
-## **ScreenShoot**
 
 ## **What Actually Happened**
 
